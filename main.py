@@ -1,21 +1,25 @@
+
 from flask import Flask, request, jsonify
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
+import joblib
 
-# Load your actual dataset (rename if needed)
-df = pd.read_csv("Crop(Distric level).csv")
-
-# Drop district column if not needed
-df = df.drop('district', axis=1)
-
-# Prepare training data
-X = df.drop("label", axis=1)
-y = df["label"]
-
-# Train the model
-model = RandomForestClassifier()
-model.fit(X, y)
+# Load the pre-trained model
+try:
+    model = joblib.load('crop_model.pkl')
+    print("✅ Pre-trained model loaded successfully!")
+    print(f"Model type: {type(model).__name__}")
+except Exception as e:
+    print(f"❌ Error loading pkl model: {e}")
+    # Fallback to training new model
+    from sklearn.ensemble import RandomForestClassifier
+    df = pd.read_csv("Crop(Distric level).csv")
+    df = df.drop('district', axis=1)
+    X = df.drop("label", axis=1)
+    y = df["label"]
+    model = RandomForestClassifier()
+    model.fit(X, y)
+    print("✅ Fallback: New model trained")
 
 # Start Flask app
 app = Flask(__name__)
