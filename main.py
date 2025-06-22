@@ -20,6 +20,10 @@ model.fit(X, y)
 # Start Flask app
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def home():
+    return {"message": "Crop Recommendation API is running. Use POST /predict to get recommendations."}
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
