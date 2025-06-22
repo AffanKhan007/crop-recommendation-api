@@ -1,10 +1,14 @@
-
 { pkgs }: {
   deps = [
-    pkgs.python39
-    pkgs.python39Packages.flask
-    pkgs.python39Packages.joblib
-    pkgs.python39Packages.numpy
-    pkgs.python39Packages.scikit-learn
+    pkgs.python311Full
+    pkgs.python311Packages.pip
+    pkgs.python311Packages.setuptools
+    pkgs.python311Packages.flask
+    pkgs.python311Packages.joblib
   ];
+
+  postInstall = ''
+    pip install numpy==1.26.4
+    pip install scikit-learn==1.6.1
+  '';
 }
