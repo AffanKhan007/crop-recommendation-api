@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 
 # Load your actual dataset (rename if needed)
-df = pd.read_csv("smart-farming-using-machine-learning.csv")
+df = pd.read_csv("Crop(Distric level).csv")
 
 # Drop district column if not needed
 df = df.drop('district', axis=1)
