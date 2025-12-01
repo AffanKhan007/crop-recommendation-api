@@ -40,4 +40,4 @@ def predict():
     return jsonify({'recommended_crop': prediction[0]})
 
 # Run on Replit
-app.run(host='0.0.0.0', port=3000)
+app.run(host='0.0.0.0', port=5000)
